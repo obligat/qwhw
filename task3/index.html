@@ -151,12 +151,12 @@
                         thisData = data.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
                     layui.each(thisData, function(index, item) {
                         arr.push(`<tr>
-				<th scope="row">${item.title}</th>
-				<td>${item.number}</td>
-				<td>${item.ch_number}</td>
-				<td>${item.en_number}</td>
-				<td>${item.punc_number}</td>
-			</tr>`);
+                <th scope="row">${item.title}</th>
+                <td>${item.number}</td>
+                <td>${item.ch_number}</td>
+                <td>${item.en_number}</td>
+                <td>${item.punc_number}</td>
+            </tr>`);
                     });
                     return arr.join('');
                 }();
@@ -166,6 +166,7 @@
     </script>
     <script>
     let urlText;
+    let oScript = $('#sendUrl');
     $('input').blur(function() {
         urlText = $(this).val();
     });
@@ -174,6 +175,7 @@
         let script = document.createElement('script');
         script.src = 'http://localhost:8000/add?urlText=' + urlText;
         document.body.appendChild(script);
+
         return false;
     })
     </script>

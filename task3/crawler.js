@@ -3,7 +3,20 @@ const https = require('https');
 const http = require('http');
 const cheerio = require('cheerio');
 
+const mysql = require('mysql');
+
+
+const connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '123456',
+    database: 'training'
+});
+
+connection.connect();
+
 let urlText = '';
+let data = {};
 
 const server = http.createServer((req, res) => {
 
@@ -24,6 +37,19 @@ const server = http.createServer((req, res) => {
 
             res.on('end', () => {
                 filterArticle(html);
+
+                let addSql = 'INSERT INTO file_content(title,number,ch_number,en_number,punc_number) VALUES(?,?,?,?,?)';
+                let addSqlParams = [data.title, data.number, data.ch_number, data.en_number, data.punc_number];
+
+                connection.query(addSql, addSqlParams, function(err, result) {
+                    if (err) {
+                        console.log('[INSERT ERROR] - ', err.message);
+                        return;
+                    }
+                    console.log('INSERT ID:', result);
+                });
+
+                connection.end();
             });
 
 
@@ -41,8 +67,6 @@ function replaceText(text) {
 
 function filterArticle(html) {
     let $ = cheerio.load(html);
-
-    let data = {};
 
     let article = $('.article').html();
 
@@ -65,5 +89,4 @@ function filterArticle(html) {
     let en_punc_number = content.match(en_reg) ? content.match(en_reg).length : 0;
     let ch_punc_number = content.match(ch_reg) ? content.match(ch_reg).length : 0;
     data.punc_number = en_punc_number + ch_punc_number;
-    console.log(data)
 }
