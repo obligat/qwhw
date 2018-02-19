@@ -15,12 +15,14 @@ const connection = mysql.createConnection({
 
 connection.connect();
 
+
 let urlText = '';
 let data = {};
 
 const server = http.createServer((req, res) => {
 
     let urlObj = url.parse(req.url, true);
+    let html = '';
 
     urlText = urlObj.query.urlText;
     let pathname = urlObj.pathname;
@@ -29,7 +31,6 @@ const server = http.createServer((req, res) => {
         console.log(urlText);
 
         https.get(urlText, (res) => {
-            let html = '';
 
             res.on('data', (data) => {
                 html += data;
@@ -37,21 +38,8 @@ const server = http.createServer((req, res) => {
 
             res.on('end', () => {
                 filterArticle(html);
-
-                let addSql = 'INSERT INTO file_content(title,number,ch_number,en_number,punc_number) VALUES(?,?,?,?,?)';
-                let addSqlParams = [data.title, data.number, data.ch_number, data.en_number, data.punc_number];
-
-                connection.query(addSql, addSqlParams, function(err, result) {
-                    if (err) {
-                        console.log('[INSERT ERROR] - ', err.message);
-                        return;
-                    }
-                    console.log('INSERT ID:', result);
-                });
-
-                connection.end();
-            });
-
+                connectionSql();
+            })
 
         }).on('error', () => console.log('error'))
         res.end()
@@ -89,4 +77,19 @@ function filterArticle(html) {
     let en_punc_number = content.match(en_reg) ? content.match(en_reg).length : 0;
     let ch_punc_number = content.match(ch_reg) ? content.match(ch_reg).length : 0;
     data.punc_number = en_punc_number + ch_punc_number;
+    console.log(data)
+}
+
+function connectionSql() {
+
+    let addSql = 'INSERT INTO file_content(title,number,ch_number,en_number,punc_number) VALUES(?,?,?,?,?)';
+    let addSqlParams = [data.title, data.number, data.ch_number, data.en_number, data.punc_number];
+
+    connection.query(addSql, addSqlParams, function(err, result) {
+        if (err) {
+            console.log('[INSERT ERROR] - ', err.message);
+            return;
+        }
+        console.log('INSERT ID:', result);
+    });
 }

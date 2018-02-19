@@ -39,27 +39,6 @@
                 </tr>
             </thead>
             <tbody id="tbody">
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                    <td>@twitter</td>
-                </tr>
             </tbody>
         </table>
         <div id="page"></div>
@@ -69,73 +48,36 @@
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script>
+    let urlText;
+    $('input').blur(function() {
+        urlText = $(this).val();
+    });
+    $('button:submit').click(function() {
+
+        let script = document.createElement('script');
+        script.src = 'http://localhost:8000/add?urlText=' + urlText;
+        document.body.appendChild(script);
+
+        $('body > script').last().remove()
+        return false;
+    })
+    </script>
     <script src="layui-v2.2.5/layui/layui.js"></script>
     <script>
-    layui.use(['laypage', 'layer'], function() {
+    let data;
+
+    $.ajax({
+        url: 'http://localhost:8080/counter/getData',
+        success: function(data) {
+            console.log(data)
+        }
+    })
+    /*layui.use(['laypage', 'layer'], function() {
         var laypage = layui.laypage,
             layer = layui.layer;
-        //测试数据
-        let data = [{
-            title: 'this is title',
-            number: 32,
-            ch_number: 30,
-            en_number: 2,
-            punc_number: 22
-        }, {
-            title: 'this is title',
-            number: 32,
-            ch_number: 30,
-            en_number: 2,
-            punc_number: 22
-        }, {
-            title: 'this is title',
-            number: 32,
-            ch_number: 30,
-            en_number: 2,
-            punc_number: 22
-        }, {
-            title: 'this is title',
-            number: 32,
-            ch_number: 30,
-            en_number: 2,
-            punc_number: 22
-        }, {
-            title: 'this is title',
-            number: 32,
-            ch_number: 30,
-            en_number: 2,
-            punc_number: 22
-        }, {
-            title: 'this is title',
-            number: 32,
-            ch_number: 30,
-            en_number: 2,
-            punc_number: 22
-        }, {
-            title: 'this is title',
-            number: 32,
-            ch_number: 30,
-            en_number: 2,
-            punc_number: 22
-        }, {
-            title: 'this is title',
-            number: 32,
-            ch_number: 30,
-            en_number: 2,
-            punc_number: 22
-        }, {
-            title: 'this is title',
-            number: 32,
-            ch_number: 30,
-            en_number: 2,
-            punc_number: 22
-        }, {
-            title: 'this is title',
-            number: 32,
-            ch_number: 30,
-            en_number: 2,
-            punc_number: 22
-        }, ];
+
         //调用分页
         laypage.render({
             elem: 'page',
@@ -151,33 +93,18 @@
                         thisData = data.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
                     layui.each(thisData, function(index, item) {
                         arr.push(`<tr>
-                <th scope="row">${item.title}</th>
-                <td>${item.number}</td>
-                <td>${item.ch_number}</td>
-                <td>${item.en_number}</td>
-                <td>${item.punc_number}</td>
-            </tr>`);
+				<th scope="row">${item.title}</th>
+				<td>${item.number}</td>
+				<td>${item.ch_number}</td>
+				<td>${item.en_number}</td>
+				<td>${item.punc_number}</td>
+			</tr>`);
                     });
                     return arr.join('');
                 }();
             }
         });
-    });
-    </script>
-    <script>
-    let urlText;
-    let oScript = $('#sendUrl');
-    $('input').blur(function() {
-        urlText = $(this).val();
-    });
-    $('button:submit').click(function() {
-        console.log(urlText);
-        let script = document.createElement('script');
-        script.src = 'http://localhost:8000/add?urlText=' + urlText;
-        document.body.appendChild(script);
-
-        return false;
-    })
+    });*/
     </script>
 </body>
 
