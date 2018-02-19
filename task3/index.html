@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="./layui-v2.2.5/layui/css/layui.css">
+    <title>Hello, world!</title>
+    <style>
+    body {
+        padding: 50px;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <form action="">
+            <div class="form-group row">
+                <div class="col-sm">
+                    <input type="text" class="form-control" />
+                </div>
+                <div class="col-sm">
+                    <button type="submit" class="btn btn-primary">add</button>
+                </div>
+            </div>
+        </form>
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">标题</th>
+                    <th scope="col">字数</th>
+                    <th scope="col">中文字数</th>
+                    <th scope="col">英文字数</th>
+                    <th scope="col">标点符号数</th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    <td>@mdo</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                    <td>@fat</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                    <td>@twitter</td>
+                </tr>
+            </tbody>
+        </table>
+        <div id="page"></div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="layui-v2.2.5/layui/layui.js"></script>
+    <script>
+    layui.use(['laypage', 'layer'], function() {
+        var laypage = layui.laypage,
+            layer = layui.layer;
+        //测试数据
+        let data = [{
+            title: 'this is title',
+            number: 32,
+            ch_number: 30,
+            en_number: 2,
+            punc_number: 22
+        }, {
+            title: 'this is title',
+            number: 32,
+            ch_number: 30,
+            en_number: 2,
+            punc_number: 22
+        }, {
+            title: 'this is title',
+            number: 32,
+            ch_number: 30,
+            en_number: 2,
+            punc_number: 22
+        }, {
+            title: 'this is title',
+            number: 32,
+            ch_number: 30,
+            en_number: 2,
+            punc_number: 22
+        }, {
+            title: 'this is title',
+            number: 32,
+            ch_number: 30,
+            en_number: 2,
+            punc_number: 22
+        }, {
+            title: 'this is title',
+            number: 32,
+            ch_number: 30,
+            en_number: 2,
+            punc_number: 22
+        }, {
+            title: 'this is title',
+            number: 32,
+            ch_number: 30,
+            en_number: 2,
+            punc_number: 22
+        }, {
+            title: 'this is title',
+            number: 32,
+            ch_number: 30,
+            en_number: 2,
+            punc_number: 22
+        }, {
+            title: 'this is title',
+            number: 32,
+            ch_number: 30,
+            en_number: 2,
+            punc_number: 22
+        }, {
+            title: 'this is title',
+            number: 32,
+            ch_number: 30,
+            en_number: 2,
+            punc_number: 22
+        }, ];
+        //调用分页
+        laypage.render({
+            elem: 'page',
+            theme: '#0069d9',
+            count: data.length,
+            limit: 5,
+            prev: '<em>←</em>',
+            next: '<em>→</em>',
+            jump: function(obj) {
+                //模拟渲染
+                document.getElementById('tbody').innerHTML = function() {
+                    let arr = [],
+                        thisData = data.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
+                    layui.each(thisData, function(index, item) {
+                        arr.push(`<tr>
+				<th scope="row">${item.title}</th>
+				<td>${item.number}</td>
+				<td>${item.ch_number}</td>
+				<td>${item.en_number}</td>
+				<td>${item.punc_number}</td>
+			</tr>`);
+                    });
+                    return arr.join('');
+                }();
+            }
+        });
+    });
+    </script>
+    <script>
+    let urlText;
+    $('input').blur(function() {
+        urlText = $(this).val();
+    });
+    $('button:submit').click(function() {
+        console.log(urlText);
+        let script = document.createElement('script');
+        script.src = 'http://localhost:8000/add?urlText=' + urlText;
+        document.body.appendChild(script);
+        return false;
+    })
+    </script>
+</body>
+
+</html>
