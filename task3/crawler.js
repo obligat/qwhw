@@ -58,7 +58,7 @@ function filterArticle(html) {
 
     let article = $('.article').html();
 
-    data.title = $('h1.title').text();
+    data.title = `<a href=${urlText}>${$('h1.title').text()}</a>`;
 
 
     let content = replaceText($('.show-content-free p').text());
