@@ -18,5 +18,5 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "homepage": "https://obligat.github.io/todo-list-3"
+  "homepage": "https://obligat.github.io/qwhw/task2"
 }
