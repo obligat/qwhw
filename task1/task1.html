@@ -282,30 +282,22 @@
 </div>
 <script type="text/javascript">
     var mybody = document.querySelector('body');
+    var oUl = document.querySelector('ul');
     mybody.style.height = document.documentElement.clientHeight;
 
     var oTop = document.querySelector('.top'),
         oBottom = document.querySelector('.bottom');
 
-    var startY, endY, movedY;
-    mybody.addEventListener('touchstart', function (e) {
-        startY = e.touches[0].pageY;
-    });
-    mybody.addEventListener('touchmove', function (e) {
-        endY = e.touches[0].pageY;
-        movedY = endY - startY;
 
-        if (movedY > 0) {
-            //     oTop.style.display = 'none';
-            //     oBottom.style.display = 'none';
+    window.addEventListener('scroll', function() {
+        oTop.className = 'top hidden';
+        oBottom.className = 'bottom hidden';
+
+        setTimeout(function () {
             oTop.className = 'top';
             oBottom.className = 'bottom';
-        } else if (movedY < 0) {
-
-            oTop.className = 'top hidden';
-            oBottom.className = 'bottom hidden';
-        }
-    })
+        },500)
+    });
 </script>
 </body>
 
