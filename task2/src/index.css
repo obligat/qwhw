@@ -10,13 +10,13 @@ ul,li{
 
 
 .container{
-  width: 60%;
+  width: 50%;
   position: relative;
 }
 
 h1{
   width: 100%;
-  margin:0 auto;
+  margin:50px auto;
   text-align: center;
   font-weight: bolder;
 }
@@ -70,4 +70,8 @@ input[type=checkbox]:after {
 
 hr{
   margin:30px 0;
+}
+
+.li-done{
+  background: limegreen;
 }

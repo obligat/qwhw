@@ -4,7 +4,6 @@ import TodoItem from './TodoItem';
 export default function (props) {
 
     let allItems = props.items || [];
-    console.log(allItems);
 
     let doneNumber = allItems.filter(item => item.isDone).length;
 

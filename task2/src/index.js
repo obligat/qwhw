@@ -16,7 +16,7 @@ class TodoApp extends React.Component {
 
         /*
         * this.state ={
-        *   todoItems:[]
+        *   TodoItems:[]
         * }
         *
         * */

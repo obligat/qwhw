@@ -52,7 +52,7 @@ export default class TodoInput extends React.Component{
                         </div>
                 </div>
                 <div>
-                    <button className="btn btn-primary float-right saveBtn"  onClick={this.handleSubmit}>Save Task</button>
+                    <button className="btn btn-info float-right saveBtn"  onClick={this.handleSubmit}>Save Task</button>
                 </div>
             </form>
         )

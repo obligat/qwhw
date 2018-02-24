@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function (props) {
-    return (<li className="list-group-item todo-item-li">
+    return (<li className={props.item.isDone ? "list-group-item todo-item-li list-group-item-success" : "list-group-item todo-item-li"}>
         <div>
             <input type="checkbox"
                    onChange={(e) => props.handleChange(props.item.id, e)}
@@ -13,6 +13,7 @@ export default function (props) {
         <div>
             <button type="button"
                     className="close"
+                    style={{display:props.item.isDone?"block":"none"}}
                     onClick={() => props.onRemove(props.item.id)}>&times;</button>
         </div>
     </li>)
